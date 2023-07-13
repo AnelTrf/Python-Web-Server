@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет по контрагенту</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+ <select name="colors" id="colors2" tabIndex="1" style="width: 700px;">
+
+</style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/main">Система статистики</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">Отчеты</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/revise-contra">По контрагенту</a></li>
+            <li><a class="dropdown-item" href="/revise">Сводный</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contra">Контрагенты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/module">Модули</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Пользователи</a>
+        </li>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav"></ul>
+        <ul class="nav navbar-nav navbar-right">
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Профиль</a>
+          <ul class="dropdown-menu ml-auto" >
+            <li><a class="dropdown-item" href="/">Сменить пароль</a></li>
+            <li><a class="dropdown-item" href="/">Выйти</a></li>
+          </ul>
+         </li>
+        </ul>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+      <ol class="breadcrumb">
+        <li class="active">Отчет</li>
+      </ol>
+</div>
+
+<h1>Отчет</h1>
+
+
+<form class="text-center" style="width700px">
+<div id="pl-momentum">
+    <select name="colors2" id="colors2" tabIndex="1" >
+          <option value="" selected="selected" > Выберите контрагент </option>
+        {% for row in rows %}
+       <option value="row">{{ row[1] }}</option>
+
+        {% endfor %}
+  </select>
+
+</div>
+</form>
+
+<script>
+x = false;
+function Check(){
+  if(x){
+    document.getElementById("pl-standard").style.display='none';
+    document.getElementById("pl-momentum").style.display='inline';
+    x = false;
+  }
+  else{
+    document.getElementById("pl-standard").style.display='inline';
+    document.getElementById("pl-momentum").style.display='none';
+    x = true;
+  }
+}</script>
+
+    <div class="form-group">
+    <label class="col-sm-2 control-label">От</label>
+    <div class="col-sm-9">
+        <div class="input-group date datetimepicker">
+            <input id="datepicker" name="from_date" width="700" placeholder="От" />
+
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">До</label>
+    <div class="col-sm-9">
+        <div class="input-group date datetimepicker">
+            <input id="datepicker2" name="to_date" width="700" placeholder="До" />
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#datepicker').datepicker();
+    $('#datepicker2').datepicker();
+</script>
+
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+              <a href="/rev-form" class="btn btn-primary" type="submit" name="generate-report" style="margin-top: 20px;"> Сформировать </a>
+              <a href="/rev-form" class="btn btn-primary" type="submit" name="generate-report" style="margin-top: 20px;"> Экспорт в эксель </a>
+
+          </div>
+        </div>
+
+</body>
+</html>
